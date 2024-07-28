@@ -28,5 +28,5 @@ case '/info':
   }
   return http_response_code(404);
 default:
-  break;
+  return http_response_code(404);
 }
