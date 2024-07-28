@@ -1,0 +1,17 @@
+{
+    "require": {
+        "ext-libvirt": "^0.5.7"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dominium\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Robert Gingras",
+            "email": "developer@three-point-five.dev"
+        }
+    ]
+}
