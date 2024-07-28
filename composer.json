@@ -6,7 +6,10 @@
     "autoload": {
         "psr-4": {
             "Dominium\\": "src/"
-        }
+        },
+        "files": [
+          "src/lib/index.php"
+        ]
     },
     "authors": [
         {

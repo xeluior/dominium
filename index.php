@@ -1,6 +1,6 @@
 <?php
 
-require_once '../src/lib/index.php';
+require_once 'vendor/autoload.php';
 
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestPath = parse_url($requestUri, PHP_URL_PATH);
@@ -12,11 +12,9 @@ if (str_ends_with($requestPath, '/') && strlen($requestPath) > 1) {
 
 switch ($requestPath) {
 case '/':
-  render('index');
-  break;
+  return render('index');
 case '/domains':
-  require_once '../src/controllers/domains.php';
-  $domains = new DomainController();
+  $domains = new \Dominium\Controllers\DomainController();
   return $domains->index();
 case '/networks':
   break;
@@ -24,6 +22,11 @@ case '/volumes':
   break;
 case '/pools':
   break;
+case '/info':
+  if (ini_get('display_errors')) {
+    return phpinfo();
+  }
+  return http_response_code(404);
 default:
   break;
 }

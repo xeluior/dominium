@@ -1,5 +1,7 @@
 <?php
 
+namespace Dominium\Controllers;
+
 class DomainController {
   public function index() {
     $conn = libvirt_connect('qemu:///session');

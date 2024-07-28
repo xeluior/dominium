@@ -1,8 +1,8 @@
 <?php
 
 function render($template, $context = null) {
-  $body = "../src/templates/$template.php";
-  include '../src/templates/layout.php';
+  $body = "src/templates/$template.php";
+  include 'src/templates/layout.php';
 }
 
 enum Redirect: int {
