@@ -2,6 +2,8 @@
 
 namespace Dominium\Controllers;
 
+use Dominium\Models\Domain;
+
 class DomainController {
   public function index() {
     $conn = libvirt_connect('qemu:///session');
@@ -14,6 +16,20 @@ class DomainController {
       }
     })();
 
-    render('domains/index', $domains);
+    return render('domains/index', $domains);
+  }
+
+  public function show($uuid) {
+    $conn = libvirt_connect('qemu:///session');
+    $domain = Domain::lookup($conn, uuid: $uuid);
+
+    return render('domains/show', $domain);
+  }
+
+  public function edit($uuid) {
+    $conn = libvirt_connect('qemu:///session');
+    $domain = Domain::lookup($conn, uuid: $uuid);
+
+    return render('domains/edit', $domain);
   }
 }

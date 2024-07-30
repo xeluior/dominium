@@ -10,23 +10,28 @@ if (str_ends_with($requestPath, '/') && strlen($requestPath) > 1) {
   location($realPath);
 }
 
-switch ($requestPath) {
-case '/':
+if ($requestPath === '/') {
   return render('index');
-case '/domains':
-  $domains = new \Dominium\Controllers\DomainController();
+} elseif ($requestPath === '/domains') {
+  $domains = new Dominium\Controllers\DomainController();
   return $domains->index();
-case '/networks':
-  break;
-case '/volumes':
-  break;
-case '/pools':
-  break;
-case '/info':
+} elseif (preg_match('#^/domains/([^/]+)$#', $requestPath, $data)) {
+  $domain = new Dominium\Controllers\DomainController();
+  return $domain->show($data[1]);
+} elseif (preg_match('#^/domains/([^/]+)/edit$#', $requestPath, $data)) {
+  $domain = new Dominium\Controllers\DomainController();
+  return $domain->edit($data[1]);
+} elseif ($requestPath === '/networks') {
+  return;
+} elseif ($requestPath === '/volumes') {
+  return;
+} elseif ($requestPath === '/pools') {
+  return;
+} elseif ($requestPath === '/info') {
   if (ini_get('display_errors')) {
     return phpinfo();
   }
   return http_response_code(404);
-default:
+} else {
   return http_response_code(404);
 }
